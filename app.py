@@ -1,3 +1,4 @@
+from resume_parser import extract_text
 from flask import Flask, render_template, request
 import os
 
@@ -19,18 +20,23 @@ def home():
 def upload():
 
     if "resume" not in request.files:
-        return "No file selected."
+        return "No file selected"
 
     file = request.files["resume"]
 
     if file.filename == "":
-        return "Please choose a file."
+        return "Please choose a file"
 
     filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+
     file.save(filepath)
 
-    return f"✅ Resume uploaded successfully!<br><br>Saved as: {file.filename}"
+    resume_text = extract_text(filepath)
 
+    return render_template(
+        "result.html",
+        resume_text=resume_text
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
