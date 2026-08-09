@@ -1,3 +1,4 @@
+from analyzer import detect_skills
 from resume_parser import extract_text
 from flask import Flask, render_template, request
 import os
@@ -32,10 +33,13 @@ def upload():
     file.save(filepath)
 
     resume_text = extract_text(filepath)
+    detected_skills = detect_skills(resume_text)
 
     return render_template(
         "result.html",
-        resume_text=resume_text
+        resume_text=resume_text,
+        detected_skills=detected_skills
+
     )
 
 if __name__ == "__main__":

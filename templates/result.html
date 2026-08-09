@@ -16,7 +16,25 @@ href="{{ url_for('static', filename='style.css') }}">
 <div class="container">
 
 <h1>Resume Extracted Successfully</h1>
+<h2>🧠 Detected Skills</h2>
 
+<div class="skills">
+
+    {% if detected_skills %}
+
+        {% for skill in detected_skills %}
+
+            <span class="skill">{{ skill }}</span>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No known skills detected.</p>
+
+    {% endif %}
+
+</div>
 <pre>
 
 {{ resume_text }}
