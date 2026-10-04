@@ -1,3 +1,4 @@
+from score import calculate_score
 from analyzer import detect_skills
 from resume_parser import extract_text
 from flask import Flask, render_template, request
@@ -34,11 +35,17 @@ def upload():
 
     resume_text = extract_text(filepath)
     detected_skills = detect_skills(resume_text)
+    analysis =calculate_score(
+        resume_text,
+        detected_skills
+    )
 
     return render_template(
         "result.html",
         resume_text=resume_text,
-        detected_skills=detected_skills
+        detected_skills=detected_skills,
+        analysis=analysis
+
 
     )
 

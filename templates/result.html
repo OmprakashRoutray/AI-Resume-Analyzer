@@ -16,6 +16,69 @@ href="{{ url_for('static', filename='style.css') }}">
 <div class="container">
 
 <h1>Resume Extracted Successfully</h1>
+<h2>📊 ATS Resume Score</h2>
+
+<div class="score-box">
+
+    <div class="score-number">
+        {{ analysis.score }}/100
+    </div>
+
+    <p>Overall ATS Score</p>
+
+</div>
+
+<div class="score-details">
+
+    <p>
+        <strong>Skills:</strong>
+        {{ analysis.skill_score }}/40
+    </p>
+
+    <p>
+        <strong>Education:</strong>
+        {{ analysis.education_score }}/20
+    </p>
+
+    <p>
+        <strong>Projects:</strong>
+        {{ analysis.project_score }}/20
+    </p>
+
+    <p>
+        <strong>Contact:</strong>
+        {{ analysis.contact_score }}/10
+    </p>
+
+    <p>
+        <strong>Sections:</strong>
+        {{ analysis.section_score }}/10
+    </p>
+
+</div>
+<h2>💡 Suggestions</h2>
+
+<div class="suggestions">
+
+    {% if analysis.suggestions %}
+
+        <ul>
+
+        {% for suggestion in analysis.suggestions %}
+
+            <li>{{ suggestion }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>🎉 Great job! No major improvements detected.</p>
+
+    {% endif %}
+
+</div>
 <h2>🧠 Detected Skills</h2>
 
 <div class="skills">
